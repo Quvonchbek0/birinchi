@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevgi Sahifasi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: url('bg.jpg') center/cover no-repeat;
+      font-family: "Segoe UI", cursive, sans-serif;
+      overflow: hidden;
+      position: relative;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .text-box {
+      background: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      animation: shake 2.5s infinite alternate;
+      max-width: 90%;
+      font-size: 1.4em;
+      line-height: 1.6;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      z-index: 20;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2.8em;
+      pointer-events: none;
+      z-index: 15;
+      animation: flyUp 4s forwards ease-out;
+      user-select: none;
+    }
+
+    @keyframes flyUp {
+      0% { transform: translateY(0) scale(0.7); opacity: 0; }
+      50% { transform: translateY(-70px) scale(1.4); opacity: 1; }
+      100% { transform: translateY(-160px) scale(0.7); opacity: 0; }
+    }
+
+    #play-btn {
+      margin-top: 25px;
+      padding: 14px 30px;
+      font-size: 1.2em;
+      border-radius: 20px;
+      border: none;
+      background: #ff1493;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255,20,147,0.4);
+      transition: 0.3s;
+      z-index: 20;
+    }
+
+    #play-btn:hover {
+      background: #ff69b4;
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text-box">
+    Barchasi oddiy ko‘rinadi,<br>
+    lekin u bor joyda<br>
+    hammasi boshqacha
+  </div>
+
+  <!-- YASHIRIN VIDEO -->
+  <video id="bg-video" autoplay loop muted playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <!-- YURAK KONTEYNERI -->
+  <div id="hearts-container"></div>
+
+  <!-- OVOZ YOQISH -->
+  <button id="play-btn">Ovoz yoqish</button>
+
+  <!-- MUSIQA -->
+  <audio id="bg-audio" loop>
+    <source src="musiqa.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const container = document.getElementById('hearts-container');
+    const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ff4500', '#ff69b4'];
+    const video = document.getElementById('bg-video');
+    const audio = document.getElementById('bg-audio');
+    const btn = document.getElementById('play-btn');
+
+    // Video avto-ijro
+    video.play().catch(() => {});
+
+    // Ovoz yoqish
+    btn.addEventListener('click', () => {
+      audio.play();
+      btn.style.display = 'none';
+    });
+
+    // Yurak yaratish
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = 'Heart';
+      heart.style.left = Math.random() * 80 + 10 + 'vw';
+      heart.style.bottom = '-10px';
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    // Doimiy yurak
+    setInterval(createHeart, 1000);
+
+    // Dastlabki 8 ta
+    for (let i = 0; i < 8; i++) {
+      setTimeout(createHeart, i * 300);
+    }
+  </script>
+
+</body>
+</html>
