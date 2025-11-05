@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevgi Sahifasi </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-image: url('bg.jpg'); /* Fon rasm */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: "Segoe UI", cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2em;
+      text-align: center;
+      background: rgba(0,0,0,0.4);
+      padding: 20px;
+      border-radius: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      margin-bottom: 20px;
+      animation: fadeIn 3s ease;
+    }
+
+    video {
+      border-radius: 20px;
+      width: 320px;
+      height: 570px;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      background: #000;
+    }
+
+    audio { display: none; }
+
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 20px;
+      color: pink;
+      animation: fly 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fly {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.8); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+
+  <h1> Barchasi oddiy ko‘rinadi,<br>lekin u bor joyda hammasi boshqacha </h1>
+
+  <video controls autoplay muted loop>
+    <source src="video.mp4" type="video/mp4">
+    Video yuklanmadi.
+  </video>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_62ba2c4a74.mp3?filename=beautiful-piano-melody-10972.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Yuraklar animatsiyasi
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random()*3) + 's';
+      heart.style.fontSize = (15 + Math.random()*20) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+
+    // Klaviatura interaktiv effekt
+    document.addEventListener('keydown', (e) => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.bottom = '0px';
+      heart.style.animationDuration = '2s';
+      heart.style.fontSize = (20 + Math.random()*30) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    });
+  </script>
+</body>
+</html> 
