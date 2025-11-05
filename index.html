@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevgi Sahifasi </title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), 
+                  url('https://raw.githubusercontent.com/Quvonchbek0/birinchi/main/bg.jpg') center/cover no-repeat;
+      font-family: "Segoe UI", cursive, sans-serif;
+      overflow: hidden;
+      position: relative;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      background: rgba(0,0,0,0.6);
+      padding: 20px 30px;
+      border-radius: 25px;
+      animation: shake 2.5s infinite alternate;
+      text-align: center;
+      z-index: 20;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+      max-width: 90%;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Video - Fon sifatida, yashirin */
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0.3; /* Xira qilish */
+      pointer-events: none;
+    }
+
+    /* Yurakchalar */
+    .heart {
+      position: absolute;
+      font-size: 2.5em;
+      animation: float 3s infinite ease-in-out;
+      pointer-events: none;
+      z-index: 10;
+      user-select: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-30px) scale(1.3); opacity: 1; }
+    }
+
+    /* Audio yashirin */
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+  <video id="bg-video" autoplay loop muted playsinline>
+    <source src="https://raw.githubusercontent.com/Quvonchbek0/birinchi/main/video.mp4" type="video/mp4">
+    Video yuklanmadi.
+  </video>
+
+  <h1> Barchasi oddiy ko‘rinadi,<br>lekin u bor joyda hammasi boshqacha </h1>
+
+  <div id="hearts-container"></div>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_62ba2c4a74.mp3?filename=beautiful-piano-melody-10972.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const heartsContainer = document.getElementById('hearts-container');
+    const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ff7f50', '#ff4500'];
+    const totalHearts = 12;
+
+    // Video avto-ijro (mobil uchun ham)
+    const video = document.getElementById('bg-video');
+    video.play().catch(() => console.log("Video autoplay blocked"));
+
+    // Yurakchalar yaratish
+    for (let i = 0; i < totalHearts; i++) {
+      setTimeout(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '';
+        heart.style.left = Math.random() * 85 + 5 + 'vw';
+        heart.style.top = Math.random() * 70 + 15 + 'vh';
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+        heartsContainer.appendChild(heart);
+
+        // 10 soniyadan keyin o'chirish (to'planib qolmasin)
+        setTimeout(() => heart.remove(), 10000);
+      }, i * 800);
+    }
+
+    // Har 3 soniyada yangi yurak
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '';
+      heart.style.left = Math.random() * 85 + 5 + 'vw';
+      heart.style.top = '90vh';
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.animation = `float ${3 + Math.random()}s ease-in-out`;
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 3000);
+  </script>
+
+</body>
+</html>
