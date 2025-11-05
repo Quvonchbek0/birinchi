@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevgi Sahifasi </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-image: url('https://raw.githubusercontent.com/Quvonchbek0/birinchi/main/bg.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      font-family: "Segoe UI", cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2em;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 20px;
+      animation: fadeIn 3s ease;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    /* Yurak animatsiyasi */
+    h1::after {
+      content: "";
+      display: block;
+      font-size: 1.5em;
+      animation: float 3s infinite;
+      margin-top: 10px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    video {
+      border-radius: 20px;
+      width: 320px;
+      height: 570px;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      background: transparent;
+      margin-bottom: 20px;
+    }
+
+    audio {
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1> Barchasi oddiy ko‘rinadi,<br>lekin u bor joyda hammasi boshqacha </h1>
+
+  <!-- Video -->
+  <video controls autoplay loop>
+    <source src="https://raw.githubusercontent.com/Quvonchbek0/birinchi/main/video.mp4" type="video/mp4">
+    Video yuklanmadi. <a href="https://github.com/Quvonchbek0/birinchi/blob/main/video.mp4" target="_blank" style="color:#ff69b4;">Bu yerda oching</a>
+  </video>
+
+  <!-- Fonda musiqa -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_62ba2c4a74.mp3?filename=beautiful-piano-melody-10972.mp3" type="audio/mpeg">
+  </audio>
+
+</body>
+</html>
